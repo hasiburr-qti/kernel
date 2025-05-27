@@ -13,11 +13,12 @@ jobs:
       group: GHA-Kernel-SelfHosted-RG
       labels: [ self-hosted, kernel-prd-u2404-x64-large-od-ephem ]
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Sync codebase
+        id: sync
+        uses: ./.github/actions/sync
         with:
-          ref: ${{ github.ref }}
-          fetch-depth: 0
+          base_branch: ${{ github.base_ref }}
+          pr_number: ${{ github.event.pull_request.number }}
 
       - name: Pull docker image
         uses: ./.github/actions/pull_docker_image
@@ -30,9 +31,11 @@ jobs:
         uses: ./.github/actions/build
         with:
           docker_image: ${{ inputs.docker_image }}
+          workspace_path: ${{ steps.sync.outputs.workspace_path }}
 
       - name: Create file list for artifacts upload
         run: |
+          cd ${{ steps.sync.outputs.workspace_path }}
           touch ../artifacts/file_list.txt
           tar -cJf modules.tar.xz ../kobj/tar-install/lib/modules/
           echo "modules.tar.xz" >> ../artifacts/file_list.txt
@@ -44,13 +47,12 @@ jobs:
         uses: ./.github/actions/aws_s3_helper
         with:
           s3_bucket: qli-prd-kernel-gh-artifacts
-          aws_access_key_id: ${{ secrets.AWSKEYID }}
-          aws_secret_access_key: ${{ secrets.AWSACCESSKEY }}
-          local_file: ../artifacts/file_list.txt
+          local_file: ${{ steps.sync.outputs.workspace_path }}/../artifacts/file_list.txt
           mode: multi-upload
 
       - name: Clean up
         run: |
+          cd ${{ steps.sync.outputs.workspace_path }}
           rm -rf ../artifacts
           rm -rf ../kobj
           rm -rf modules.tar.xz
@@ -68,7 +70,6 @@ jobs:
           fi
           SUMMARY='
           <details><summary><i>Build Summary</i></summary>
-
           '${summary}'
           </details>
           '
