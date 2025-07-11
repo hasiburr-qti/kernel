@@ -1,0 +1,17 @@
+Name                                  SHA                                  Commits
+------------------------------------------------------------------------------------
+tech/bus/peripherals      6faf7f6b6c6f52f3ae190eaa47de58798c8644fc          6
+tech/bus/pci/all          5159ecf66111209bb6561b6897edb53ada242ca1          8
+tech/bus/pci/pwrctl       c387c06e97b117087e11f3ccc43ec75233a15e29          7
+tech/debug/hwtracing      4fea1a93f8a8c3d12b2ac693c445a1175b65a64a         15
+tech/mm/drm               7c42242f76761d3fd7ecbe99a1a8036908906093          1
+tech/mm/fastrpc           5a94c05e12cbc5cecb3a039d67c51bd8aff0ecec          5
+tech/mm/video             eb43f6ad1104f4714b1747d7f68708fae0eb05ce         27
+tech/mproc/rpmsg          adf3d0ae30d0e39e7db861824b705b7f7a3040bc          1
+tech/net/bluetooth        27ab39b196ea0d814a0178be9070517f8252b956          3
+tech/pm/power             1eeed9b4e31525fcaa3b16365aa32c5d0ecb5010          1
+tech/all/dt/qcs6490       304deb2772fe44d886968f85ef704ef230bfd1e5         12
+tech/all/dt/qcs9100       8c4261ae92a4082bff7599af0ab487be01dbf022          9
+tech/all/dt/qcs8300       6ebe22bd381a322f63b204cca5888f3838ee9690          2
+tech/all/dt/qcs615        0302dddc7f2aadd87f0477b00d1e31d8d75ee69c         13
+tech/all/config           6be6a1eb7a53d93b8d7d12a29ec6aca0f9bf6753          2
